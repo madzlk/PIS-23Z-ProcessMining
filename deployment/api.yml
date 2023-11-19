@@ -1,0 +1,53 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deploy
+  labels:
+    app: versus-bets
+    tier: backend
+    component: api
+  namespace: versus
+spec:
+  selector:
+    matchLabels:
+      app: versus-bets
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: versus-bets
+        tier: backend
+        component: api
+    spec:
+      containers:
+      - name: api
+        image: madzlk/backend-api:latest
+        ports:
+          - containerPort: 8080
+        env:
+          - name: DB_SERVICE_HOST
+            value: $(POSTGRES_DB_SVC_SERVICE_HOST)
+          - name: DB_SERVICE_PORT
+            value: '5432'
+          - name: DB_USER
+            value: 'postgres'
+          - name: DB_PASSWORD
+            value: 'postgres'
+          - name: DB_DATABASE
+            value: 'postgres'
+  replicas: 2
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-svc
+  namespace: versus
+spec:
+  selector:
+    app: versus-bets
+    tier: backend
+    component: api
+  ports:
+  - port: 8080
+    targetPort: 8080
