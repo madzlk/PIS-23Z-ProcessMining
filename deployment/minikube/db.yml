@@ -3,9 +3,9 @@ kind: StatefulSet
 metadata:
   name: postgresql-db
   labels:
-    app: versus-bets
+    app: pm-proc
     tier: database
-  namespace: versus
+
 spec:
   serviceName: postgresql-db-service
   selector:
@@ -33,19 +33,19 @@ spec:
             - name: PGDATA
               value: /data/pgdata
   volumeClaimTemplates:
-  - metadata:
-      name: postgresql-db-disk
-    spec:
-      accessModes: ["ReadWriteOnce"]
-      resources:
-        requests:
-          storage: 10Gi
+    - metadata:
+        name: postgresql-db-disk
+      spec:
+        accessModes: ["ReadWriteOnce"]
+        resources:
+          requests:
+            storage: 10Gi
 ---
 apiVersion: v1
 kind: Service
 metadata:
   name: postgres-db-svc
-  namespace: versus
+
 spec:
   selector:
     component: postgresql-db

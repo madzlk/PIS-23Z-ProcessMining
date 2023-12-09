@@ -24,7 +24,7 @@ spec:
             - containerPort: 3000
           env:
             - name: REACT_APP_API_URL
-              value: ""
+              value: "http://127.0.0.1:60860"
   replicas: 2
 ---
 apiVersion: v1

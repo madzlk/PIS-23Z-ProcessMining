@@ -6,7 +6,6 @@ metadata:
     app: pm-proc
     tier: backend
     component: api
-  namespace: pm
 spec:
   selector:
     matchLabels:
@@ -26,7 +25,7 @@ spec:
             - containerPort: 8080
           env:
             - name: DB_SERVICE_HOST
-              value: ""
+              value: "127.0.0.1"
             - name: DB_SERVICE_PORT
               value: "5432"
             - name: DB_USER
