@@ -9,8 +9,8 @@ services:
       - ./src:/app/src
     environment:
       - DB_TYPE=postgresql
-      - DB_USER=postgres
-      - DB_PASSWORD=postgres
+      - DB_USER=postgresuser
+      - DB_PASSWORD=pass
       - DB_SERVICE_HOST=db
       - DB_SERVICE_PORT=5432
       - DB_DATABASE=postgres
@@ -20,5 +20,5 @@ services:
       - '5432:5432'
     environment:
       - POSTGRES_DB=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgresuser
+      - POSTGRES_PASSWORD=pass

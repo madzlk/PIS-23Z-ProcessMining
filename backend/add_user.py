@@ -1,15 +1,14 @@
 import requests
 
 # Replace with your FastAPI server URL
-base_url = "http://localhost:8080"
+base_url = "http://127.0.0.1:8080"
 
-def add_user(username, email, password, user_uid):
+
+def add_user(username, email):
     url = f"{base_url}/users/"
     user_data = {
         "username": username,
         "email": email,
-        "password": password,
-        "user_uid": user_uid,
     }
 
     response = requests.post(url, json=user_data)
@@ -23,4 +22,6 @@ def add_user(username, email, password, user_uid):
         print(f"Error details: {response.text}")
 
 # Example usage
-add_user("johwddawddw_doe", "jodwwdoe@exadwadmple.com", "securepassword", "user1wda43q")
+
+
+add_user("johqeweqwddawddw_doe", "jodwwdoe@exadwadmple.com")
