@@ -1,0 +1,14 @@
+jak dosta się do bazy danych:
+
+kubectl exec -it <pod_name> -- /bin/bash #dostaliśmy sie do poda z bazą danych 
+psql -U <user> #zalogowalismy się do bazy danych
+\l #wyświetlamy bazy danych
+use <baza danych>
+\dt
+
+postgres=# SELECT * FROM users;
+ user_uid | username | email 
+----------+----------+-------
+(0 rows)
+
+postgres=#

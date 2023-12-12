@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: madzlk/backend-api:latest
+          image: madzlk/backend-v2:latest
           ports:
             - containerPort: 8080
           env:
