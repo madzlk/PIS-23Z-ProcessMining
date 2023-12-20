@@ -1,0 +1,33 @@
+
+## deployment in azure:
+
+### setting up enviroment
+
+_You can assume that: -<your-resource-group> = PM
+<your-aks-cluster> = PM-cluster
+<your-region> = EastUS_
+
+- az group create --name <your-resource-group> --location <your-region>
+
+- az aks create --resource-group <your-resource-group> --name <your-aks-cluster> --node-count 2 --enable-addons monitoring --generate-ssh-keys
+
+- az aks get-credentials --resource-group <your-resource-group> --name <your-aks-cluster>
+
+## Deploy api + database + webapp:
+
+- kubectl apply -f db.yml
+
+  _usatwić adres LoadBalancera bazy danych w api.yml_
+
+- kubectl apply -f api.yml
+- kubectl apply -f api-np-svc.yml
+
+  _usatwić adres LoadBalancera api w webapp.yml_
+
+- kubectl apply -f webapp.yml
+- kubectl apply -f webapp-np-svc.yml
+  
+przydatne komendy:
+kubectl exec -it <pod-name> -- env
+kubectl logs <pod-name>
+kubectl describe service/webapp-service
