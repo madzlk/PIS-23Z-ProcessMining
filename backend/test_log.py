@@ -1,5 +1,5 @@
 import pytest
-from .log import Log
+from log import Log
 
 def test_sanity():
     assert True
