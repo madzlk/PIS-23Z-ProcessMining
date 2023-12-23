@@ -1,3 +1,6 @@
 __pycache__/
 backend/__pycache__/
 backendsrc/
+frontend/pis/pyvenv.cfg
+pis
+.DS_Store
