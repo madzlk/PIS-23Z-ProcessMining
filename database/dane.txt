@@ -1,0 +1,131 @@
+Jak obsłużyć dane:
+
+1. aktualnie dane mają postać:
+
+[
+  {
+    "Incident ID": "IM0000004",
+    "DateStamp": "07-01-2013 08:17:17",
+    "IncidentActivity_Number": "001A3689763",
+    "IncidentActivity_Type": "Reassignment",
+    "Assignment Group": "TEAM0001",
+    "KM number": "KM0000553",
+    "Interaction ID": "SD0000007"
+  },
+  {
+    "Incident ID": "IM0000004",
+    "DateStamp": "04-11-2013 13:41:30",
+    "IncidentActivity_Number": "001A5852941",
+    "IncidentActivity_Type": "Reassignment",
+    "Assignment Group": "TEAM0002",
+    "KM number": "KM0000553",
+    "Interaction ID": "SD0000007"
+  },
+
+  ...
+]
+
+2. Ładujemy je do NoSql w postaci (duration można np. policzyć jako różnice timestamp,
+ cochiaż nie wiem jak w tym przypadku obejść to że te activity moga sie dziać w innym dniu ): 
+
+[
+  {
+    "CaseID": "IM0000004", 
+    "Activity": "Reassignment", 
+    "Timestamp": "07.01.2013 08:17", 
+    "Duration": 0
+    
+    },
+
+  {
+    "CaseID": "IM0000004", 
+    "Activity": "Update from customer", 
+    "Timestamp": "04.11.2013 13:41", 
+    "Duration": 123
+    
+    },
+
+    ...
+]
+
+
+czego ja potrzebuje:
+
+1. takiego endpointu  np .../logs, i tam będzie taki wielki json w postaci:
+
+[
+  {
+    "Incident ID": "IM0000004",
+    "Activities": [
+      {
+        "DateStamp": "07-01-2013 08:17:17",
+        "Activity_Number": "001A3689763",
+        "Activity_Type": "Reassignment"
+      },
+      {
+        "DateStamp": "04-11-2013 13:41:30",
+        "Activity_Number": "001A5852941",
+        "Activity_Type": "Reassignment"
+      },
+      {
+        "DateStamp": "04-11-2013 13:41:30",
+        "Activity_Number": "001A5852943",
+        "Activity_Type": "Update from customer"
+      },
+      ...
+    ]
+  },
+  {
+    "Incident ID": "IM0000005",
+    "Activities": [
+      {
+        "DateStamp": "03-06-2013 11:15:43",
+        "Activity_Number": "001A4725475",
+        "Activity_Type": "Update"
+      },
+      {
+        "DateStamp": "03-04-2013 11:29:46",
+        "Activity_Number": "001A4327777",
+        "Activity_Type": "Operator Update"
+      },
+      {
+        "DateStamp": "07-01-2013 08:17:54",
+        "Activity_Number": "001A3689771",
+        "Activity_Type": "Reassignment"
+      },
+      ...
+    ]
+  },
+  ...
+]
+
+2. endpointy na statystyki np. 
+a. .../activityfrequency (będziemy mogli wyświetlić np wykres słupkowy dla każdego procesu)
+
+{
+  "activityFrequency": {
+    "IM0000004": {
+      "Reassignment": 3,
+      "Update from customer": 1,
+      "Operator Update": 3,
+      "Assignment": 2,
+      "Closed": 1,
+      "Caused By CI": 1
+    },
+    "IM0000005": {
+      "Update": 1,
+      "Operator Update": 3,
+      "Reassignment": 1,
+      "Status Change": 1
+    }
+ ...
+  }
+}
+
+b. .../activityduration (jaki histogram albo inne coś, żeby poznal rozkład wykonywania )
+
+
+
+
+
+

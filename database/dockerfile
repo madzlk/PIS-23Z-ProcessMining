@@ -1,0 +1,7 @@
+FROM mongo
+EXPOSE 27017
+
+RUN echo "bind_ip_all = true" >> /etc/mongod.conf
+CMD ["mongod", "--bind_ip", "0.0.0.0"]
+
+# Update it to only accept IP address of backend
