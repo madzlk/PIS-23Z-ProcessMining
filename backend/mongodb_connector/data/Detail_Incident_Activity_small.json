@@ -1,0 +1,56 @@
+[
+    {
+        "Incident ID": "IM0000004",
+        "DateStamp": "07-01-2013 08:17:17",
+        "IncidentActivity_Number": "001A3689763",
+        "IncidentActivity_Type": "Reassignment"
+    },
+    {
+        "Incident ID": "IM0000004",
+        "DateStamp": "04-11-2013 13:41:30",
+        "IncidentActivity_Number": "001A5852941",
+        "IncidentActivity_Type": "Reassignment"
+    },
+    {
+        "Incident ID": "IM0000004",
+        "DateStamp": "04-11-2013 13:41:30",
+        "IncidentActivity_Number": "001A5852943",
+        "IncidentActivity_Type": "Update from customer"
+    },
+    {
+        "Incident ID": "IM0000004",
+        "DateStamp": "04-11-2013 12:09:37",
+        "IncidentActivity_Number": "001A5849980",
+        "IncidentActivity_Type": "Operator Update"
+    },
+    {
+        "Incident ID": "IM0000004",
+        "DateStamp": "04-11-2013 12:09:37",
+        "IncidentActivity_Number": "001A5849979",
+        "IncidentActivity_Type": "Assignment"
+    },
+    {
+        "Incident ID": "IM0000004",
+        "DateStamp": "04-11-2013 13:41:30",
+        "IncidentActivity_Number": "001A5852942",
+        "IncidentActivity_Type": "Assignment"
+    },
+    {
+        "Incident ID": "IM0000004",
+        "DateStamp": "04-11-2013 13:51:18",
+        "IncidentActivity_Number": "001A5852172",
+        "IncidentActivity_Type": "Closed"
+    },
+    {
+        "Incident ID": "IM0000004",
+        "DateStamp": "04-11-2013 13:51:18",
+        "IncidentActivity_Number": "001A5852173",
+        "IncidentActivity_Type": "Caused By CI"
+    },
+    {
+        "Incident ID": "IM0000004",
+        "DateStamp": "04-11-2013 12:09:37",
+        "IncidentActivity_Number": "001A5849978",
+        "IncidentActivity_Type": "Reassignment"
+    }
+]
