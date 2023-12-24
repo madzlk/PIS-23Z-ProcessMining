@@ -4,3 +4,4 @@ backendsrc/
 frontend/pis/pyvenv.cfg
 pis
 .DS_Store
+.vscode
