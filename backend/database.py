@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.engine import URL
 import os
 
 
@@ -13,7 +14,15 @@ DB_DATABASE = os.environ.get('DB_DATABASE')
 print(DB_SERVICE_HOST)
 print(DB_SERVICE_PORT)
 
-SQLALCHEMY_DATABASE_URL = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_SERVICE_HOST}:{DB_SERVICE_PORT}/{DB_DATABASE}'
+
+if DB_SERVICE_HOST:
+    SQLALCHEMY_DATABASE_URL = f'postgresql://{DB_USER}:{DB_PASSWORD}@{DB_SERVICE_HOST}:{DB_SERVICE_PORT}/{DB_DATABASE}'
+else:
+    SQLALCHEMY_DATABASE_URL = 'sqlite:///./test.db'
+
+
+
+#SQLALCHEMY_DATABASE_URL = f'postgresql://:postgresuser@20.241.174.75:5432/postgresdb'
 
 print(SQLALCHEMY_DATABASE_URL)
 

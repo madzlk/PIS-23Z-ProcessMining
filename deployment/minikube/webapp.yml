@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapp-deploy
+  labels:
+    app: pm-proc
+    tier: frontend
+
+spec:
+  selector:
+    matchLabels:
+      app: pm-proc
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: pm-proc
+        tier: frontend
+    spec:
+      containers:
+        - name: web-gui
+          image: madzlk/frontend-web:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: REACT_APP_API_URL
+              value: http://127.0.0.1:56581
+  replicas: 2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapp-svc
+
+spec:
+  selector:
+    app: pm-proc
+    tier: frontend
+  ports:
+    - port: 3000
+      targetPort: 3000

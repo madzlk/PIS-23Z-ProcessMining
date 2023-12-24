@@ -1,0 +1,86 @@
+usuwanie:
+kubectl delete services --all
+kubectl delete deployments --all
+kubectl delete statefulset --all 
+
+deployment:
+*przechodzimy w terminalu do folderu deployment/minikube*
+minikube start 
+kubectl get all - sprawdzic czy kubectl poprawnie działa
+kubectl apply -f .\db.yml
+kubectl apply -f .\api.yml
+kubectl apply -f .\api-np-svc.yml
+
+minikube service api-np-svc, zwóci nam:
+🏃  Starting tunnel for service api-np-svc.
+|-----------|------------|-------------|------------------------|
+| NAMESPACE |    NAME    | TARGET PORT |          URL           |
+|-----------|------------|-------------|------------------------|
+| default   | api-np-svc |             | http://127.0.0.1:56581 |
+|-----------|------------|-------------|------------------------|
+
+gdzie  http://127.0.0.1:56581 jest adresem, pod którym jest dostepne API
+kopiujemy http://127.0.0.1:56581 i w pliku webbapp.yml (w segmencie definiującym zmienne środowiskowe),
+przypisujemy go do zmiennej REACT_APP_API_URL
+
+      containers:
+        - name: web-gui
+          image: madzlk/frontend-web:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: REACT_APP_API_URL
+              value: http://127.0.0.1:56581 <- tutaj
+
+nastepnie:
+kubectl apply -f .\webapp.yml
+kubectl apply -f .\webapp-np-svc.yml
+minikube service webapp-service
+
+uwagi:
+1. Tworzenie podsów 
+niektóre podsy mogą tworzyc się dlużej i nie być dostepne od razu po wykonaniu komendy.
+Dostepność podsów można sprawdzić komandą:
+kubectl get pods, która wyświetli nam stan uruchomionych podsów, tak jak poniżej:
+NAME                            READY   STATUS    RESTARTS   AGE
+api-deploy-756887dd6-gxzmn      1/1     Running   0          10m
+api-deploy-756887dd6-m64nf      1/1     Running   0          10m
+postgresql-db-0                 1/1     Running   0          10m
+webapp-deploy-75cd7465d-fgs6s   1/1     Running   0          76s
+webapp-deploy-75cd7465d-pbnlw   1/1     Running   0          76s
+
+należy zwrcić uwage na rubrykę STATUS - oprócz running możemy ujrzeć status ContainerCreating;
+w takim wypadku należy poczekać kilka minut i wywołac komende jeszcze raz. 
+
+Aby program dzialał poprawnie w polu sttaus wszytskie podsy musza miec wartość Running
+
+2. pomimo zmiany adresu IP backendu, frontend dalej próbuje łączyc się ze starym adresem 
+Należy usunąc podsy, które zostały stworzone dla poprzendiej konfiguracji.
+Można użyć komendy:
+kubectl delete pods --all 
+pozbędziemy sie starej konfiguracji, a podsy z nowa utowrza sie autoamtycznie
+
+
+debuggowanie:
+1. wyświetlanie zmiennych środowiskowych podsa
+kubectl exec -it <pod-name> -- env
+
+2. dostęp do bazy danych z terminala: 
+
+kubectl exec -it <pod_name> -- /bin/bash #dostaliśmy sie do poda z bazą danych 
+psql -U <user> #zalogowalismy się do bazy danych
+\l #wyświetlamy bazy danych
+use <baza danych>
+\dt
+
+postgres=# SELECT * FROM users;
+ user_uid | username | email 
+----------+----------+-------
+(0 rows)
+
+postgres=#
+
+usuwanie deploymentu:
+kubectl delete services --all
+kubectl delete deployments --all
+kubectl delete statefulset --all 

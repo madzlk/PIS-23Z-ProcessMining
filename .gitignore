@@ -1,6 +1,12 @@
 __pycache__/
 backend/__pycache__/
 backendsrc/
+backend/back
+backend/src
+backend/test.db
+front_chakra/frontend/dist
+
+
 frontend/pis/pyvenv.cfg
 pis
 .DS_Store

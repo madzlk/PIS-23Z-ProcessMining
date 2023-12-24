@@ -1,8 +1,8 @@
 import pytest
-from .log import Log
+from log import Log
 
 def test_sanity():
-    assert True;
+    assert True
 
 def test_log_creation():
     log = Log(1,"IM00001", "Reasignment", '07-01-2013 08:17:54')
