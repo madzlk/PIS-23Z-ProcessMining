@@ -13,7 +13,7 @@ def create_user(db: Session, user: schemas.UserCreate):
     db.refresh(db_user)
     return db_user
 
-def get_user(db: Session, user_uid: str):
+def get_user(db: Session, user_uid: int):
     return db.query(models.User).filter(models.User.user_uid == user_uid).first()
 
 
